@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/camera_shake.gd" id="2_camera"]
+[ext_resource type="Script" path="res://scripts/cooldown_ring.gd" id="3_ring"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="4_hud"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("2_camera")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sky" type="ColorRect" parent="Background"]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.53, 0.81, 0.98, 1)
+
+[node name="Grass" type="ColorRect" parent="Background"]
+offset_top = 480.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.45, 0.78, 0.35, 1)
+
+[node name="Thrower" type="Node2D" parent="."]
+position = Vector2(120, 560)
+
+[node name="Body" type="ColorRect" parent="Thrower"]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+mouse_filter = 2
+color = Color(1, 0.6, 0.2, 1)
+
+[node name="CooldownRing" type="Node2D" parent="Thrower"]
+script = ExtResource("3_ring")
+
+[node name="Monsters" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_hud")
+
+[node name="Star" type="Polygon2D" parent="HUD"]
+position = Vector2(50, 50)
+color = Color(1, 0.85, 0.15, 1)
+polygon = PackedVector2Array(0.0, -28.0, 7.1, -9.7, 26.6, -8.7, 11.4, 3.7, 16.5, 22.7, 0.0, 12.0, -16.5, 22.7, -11.4, 3.7, -26.6, -8.7, -7.1, -9.7)
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+offset_left = 88.0
+offset_top = 14.0
+offset_right = 400.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.1, 0.25, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 56
+text = "0"

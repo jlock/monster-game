@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_explosion"]
+
+[sub_resource type="Gradient" id="Gradient_embers"]
+offsets = PackedFloat32Array(0, 0.25, 0.7, 1)
+colors = PackedColorArray(1, 1, 0.75, 1, 1, 0.65, 0.1, 1, 0.85, 0.2, 0.05, 0.8, 0.2, 0.05, 0.05, 0)
+
+[sub_resource type="Gradient" id="Gradient_smoke"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.3, 0.3, 0.3, 0, 0.35, 0.32, 0.3, 0.55, 0.5, 0.5, 0.5, 0)
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_explosion")
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+z_index = -1
+emitting = false
+amount = 30
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.9
+emission_shape = 1
+emission_sphere_radius = 60.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 30.0
+initial_velocity_max = 90.0
+damping_min = 20.0
+damping_max = 40.0
+scale_amount_min = 20.0
+scale_amount_max = 40.0
+color_ramp = SubResource("Gradient_smoke")
+
+[node name="Embers" type="CPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 80
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 200.0
+initial_velocity_max = 520.0
+damping_min = 150.0
+damping_max = 300.0
+scale_amount_min = 5.0
+scale_amount_max = 12.0
+color_ramp = SubResource("Gradient_embers")

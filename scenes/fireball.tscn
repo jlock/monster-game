@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_fireball"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fireball"]
+radius = 18.0
+
+[sub_resource type="Gradient" id="Gradient_trail"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 0.95, 0.6, 1, 1, 0.55, 0.1, 0.9, 0.8, 0.15, 0.05, 0.6, 0.3, 0.3, 0.3, 0)
+
+[node name="Fireball" type="Area2D"]
+collision_layer = 2
+collision_mask = 1
+monitorable = false
+script = ExtResource("1_fireball")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fireball")
+
+[node name="Trail" type="CPUParticles2D" parent="."]
+z_index = -1
+emitting = false
+amount = 60
+lifetime = 0.45
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -120)
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+scale_amount_min = 6.0
+scale_amount_max = 12.0
+color_ramp = SubResource("Gradient_trail")
